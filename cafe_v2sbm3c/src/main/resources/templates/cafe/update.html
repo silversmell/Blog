@@ -3,44 +3,51 @@
 <html layout:decorate="~{layout}"> <!-- layout.html 상속-->
 <div layout:fragment="content">
   <div class="title_line">카테고리 수정</div>
+    <aside class="aside_right">
+  <a th:href="@{|/cafe/delete/${cafeVO.cafeno}|}">삭제</a>
+  <span class="menu_divide">│</span>
+  <a href="/cafe/list_all">등록</a>
+  <span class="menu_divide">│</span>
+    <a href="javascript: location.reload();">새로 고침</a>
+  </aside>
   <form name="frm" th:object="${cafeVO}" method="post" action="/cafe/update">
     <input type="hidden" name="cafeno" th:value="${cafeVO.cafeno}">
-    <div>
-      <label>중분류</label>
+    <div style="margin: 5px auto; width: 50%;">
+      <label>지역명</label>
       <input type="text" name="name" th:value="${cafeVO.name}" autofocus="autofocus"
-             class="form-control fom-control-sm" style="width: 50%;" th:field="*{name}">
+             class="form-control fom-control-sm" style="width: 100%;" th:field="*{name}">
       <div th:if="${#fields.hasErrors('name')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
         <div th:each="err : ${#lists.sort(#fields.errors('name'))}" th:text="${err}"></div>
       </div>  
     </div>
-    <div>
-      <label>소분류</label>
+    <div style="margin: 5px auto; width: 50%;">
+      <label>카페명</label>
       <input type="text" name="namesub" th:value="${cafeVO.namesub}" 
-             class="form-control fom-control-sm" style="width: 50%;" th:field="*{namesub}">
+             class="form-control fom-control-sm" style="width: 100%;" th:field="*{namesub}">
       <div th:if="${#fields.hasErrors('namesub')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
         <div th:each="err : ${#lists.sort(#fields.errors('namesub'))}" th:text="${err}"></div>
       </div>             
     </div>
-    <div>
+    <div style="margin: 5px auto; width: 50%;">
       <label>관련 글수</label>
       <input type="number" name="cnt" th:value="${cafeVO.cnt}" 
-             class="form-control fom-control-sm" style="width: 50%;" th:field="*{cnt}">
+             class="form-control fom-control-sm" style="width: 100%;" th:field="*{cnt}">
       <div th:if="${#fields.hasErrors('cnt')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
         <div th:each="err : ${#lists.sort(#fields.errors('cnt'))}" th:text="${err}"></div>
       </div>  
     </div>
-    <div>
+    <div style="margin: 5px auto; width: 50%;">
       <label>출력 순서</label>
       <input type="number" name="seqno" th:value="${cafeVO.seqno}" 
-             class="form-control fom-control-sm" style="width: 50%;" th:field="*{seqno}">
+             class="form-control fom-control-sm" style="width: 100%;" th:field="*{seqno}">
       <div th:if="${#fields.hasErrors('seqno')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
         <div th:each="err : ${#lists.sort(#fields.errors('seqno'))}" th:text="${err}"></div>
       </div>             
     </div>
-    <div>
+    <div style="margin: 5px auto; width: 50%;">
       <label>출력 모드</label>
       <input type="text" name="visible" th:value="${cafeVO.visible}" 
-             class="form-control fom-control-sm" style="width: 50%;" th:field="*{visible}"> Y / N 만 입력 가능합니다.
+             class="form-control fom-control-sm" style="width: 100%;" th:field="*{visible}"> Y / N 만 입력 가능합니다.
       <div th:if="${#fields.hasErrors('visible')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
         <div th:each="err : ${#lists.sort(#fields.errors('visible'))}" th:text="${err}"></div>
       </div>
@@ -52,6 +59,42 @@
     </div>
     
   </form>  
+  <table class="table table-hover">
+    <colgroup>
+      <col style='width: 10%;'/>
+      <col style='width: 20%;'/>
+      <col style='width: 20%;'/>
+      <col style='width: 10%;'/>    
+      <col style='width: 20%;'/>
+      <col style='width: 20%;'/>
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="th_bs">순서</th>
+        <th class="th_bs">지역명</th>
+        <th class="th_bs">카페명</th>
+        <th class="th_bs">자료수</th>
+        <th class="th_bs">등록일</th>
+        <th class="th_bs">기타</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="cafeVO:${list}">
+        <td class="td_bs" th:text="${cafeVO.cafeno}"></td>
+        <td class="td_bs"><a th:href="@{|/cafe//read/${cafeVO.cafeno}|}" style="display: block;" th:text="${cafeVO.name}"></a></td>
+        <td class="td_bs"><a th:href="@{|/cafe/read/${cafeVO.cafeno}|}" style="display: block;" th:text="${cafeVO.namesub}"></a></td>
+        <td class="td_bs" th:text="${cafeVO.cnt}"></td>
+        <td class="td_bs" th:text="${cafeVO.rdate.substring(0, 10)}"></td>
+        <td class="td_bs">
+          <img src="/cafe/images/show.png" class="icon"> 
+          <img src="/cafe/images/decrease.png" class="icon">
+          <img src="/cafe/images/increase.png" class="icon">
+          <a th:href="@{|/cafe/update/${cafeVO.cafeno}|}"><img src="/cafe/images/update.png" class="icon"></a>
+          <a th:href="@{|/cafe/delete/${cafeVO.cafeno}|}"><img src="/cafe/images/delete.png" class="icon"></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 </html>
 
