@@ -27,32 +27,38 @@ public class CafeCont {
     System.out.println("-> CafeCont created");
   }
   //폼 출력
-  @GetMapping(value="/create") // http://localhost:9092/cafe/create
-  public String create(CafeVO cafeVO) { 
-    return "/cafe/create";
-  }
+//  @GetMapping(value="/create") // http://localhost:9092/cafe/create
+//  public String create(Model model, CafeVO cafeVO) { 
+//	  ArrayList<CafeVO> list = cafeProc.list_all();
+//	  model.addAttribute("list", list);
+//	 
+//    return "/cafe/create";
+//  }
   
   @PostMapping(value="/create") //프론트단에서 해결하면 네트워크 트래픽이 많이 감소됨.(하지만 타임리프는 서버단 검증)
   public String create(Model model, @Valid CafeVO cafeVO, BindingResult bindingResult) { //Valid 의 값을 BiningResult에 저장
     
+	
     if(bindingResult.hasErrors()) {
       return "/cafe/create";
     }
     int cnt = this.cafeProc.create(cafeVO);
     System.out.println("->cnt: " +cnt);
     
+    model.addAttribute("cnt",cnt);
+    
     if(cnt==1) {  //Controller에서 View로 데이터를 전달할때 사용하는 도구
-      model.addAttribute("code", "create_success");
-      model.addAttribute("name", cafeVO.getName());
-      model.addAttribute("namesub", cafeVO.getNamesub());
+//      model.addAttribute("code", "create_success");
+//      model.addAttribute("name", cafeVO.getName());
+//      model.addAttribute("namesub", cafeVO.getNamesub());
+    	
+        return "redirect:/cafe/list_all";
     }
     
     else {
       model.addAttribute("code","create_fail");
+      return "/cate/msg";
     }
-    
-    model.addAttribute("cnt",cnt);
-    return "/cafe/msg";
     
   }
   @GetMapping(value="list_all")
