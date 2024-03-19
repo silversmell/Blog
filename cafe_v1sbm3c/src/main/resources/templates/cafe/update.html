@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{layout}"> <!-- layout.html 상속-->
+<div layout:fragment="content">
+  <div class="title_line">카테고리 수정</div>
+  <form name="frm" th:object="${cafeVO}" method="post" action="/cafe/update">
+    <input type="hidden" name="cafeno" th:value="${cafeVO.cafeno}">
+    <div>
+      <label>중분류</label>
+      <input type="text" name="name" th:value="${cafeVO.name}" autofocus="autofocus"
+             class="form-control fom-control-sm" style="width: 50%;" th:field="*{name}">
+      <div th:if="${#fields.hasErrors('name')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+        <div th:each="err : ${#lists.sort(#fields.errors('name'))}" th:text="${err}"></div>
+      </div>  
+    </div>
+    <div>
+      <label>소분류</label>
+      <input type="text" name="namesub" th:value="${cafeVO.namesub}" 
+             class="form-control fom-control-sm" style="width: 50%;" th:field="*{namesub}">
+      <div th:if="${#fields.hasErrors('namesub')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+        <div th:each="err : ${#lists.sort(#fields.errors('namesub'))}" th:text="${err}"></div>
+      </div>             
+    </div>
+    <div>
+      <label>관련 글수</label>
+      <input type="number" name="cnt" th:value="${cafeVO.cnt}" 
+             class="form-control fom-control-sm" style="width: 50%;" th:field="*{cnt}">
+      <div th:if="${#fields.hasErrors('cnt')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+        <div th:each="err : ${#lists.sort(#fields.errors('cnt'))}" th:text="${err}"></div>
+      </div>  
+    </div>
+    <div>
+      <label>출력 순서</label>
+      <input type="number" name="seqno" th:value="${cafeVO.seqno}" 
+             class="form-control fom-control-sm" style="width: 50%;" th:field="*{seqno}">
+      <div th:if="${#fields.hasErrors('seqno')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+        <div th:each="err : ${#lists.sort(#fields.errors('seqno'))}" th:text="${err}"></div>
+      </div>             
+    </div>
+    <div>
+      <label>출력 모드</label>
+      <input type="text" name="visible" th:value="${cafeVO.visible}" 
+             class="form-control fom-control-sm" style="width: 50%;" th:field="*{visible}"> Y / N 만 입력 가능합니다.
+      <div th:if="${#fields.hasErrors('visible')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+        <div th:each="err : ${#lists.sort(#fields.errors('visible'))}" th:text="${err}"></div>
+      </div>
+    </div>
+    
+    <div class="content_body_bottom">
+      <button type="submit" class="btn btn-secondary btn-sm">저장</button>
+      <button type="button" onclick="location.href='/cafe/list_all'" class="btn btn-secondary btn-sm">목록</button>
+    </div>
+    
+  </form>  
+</div>
+</html>
+

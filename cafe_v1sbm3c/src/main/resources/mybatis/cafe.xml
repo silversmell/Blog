@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.mvc.cafe.CafeDAOInter"> <!-- SB가 자동으로 구현하여 연동하는 interface -->
+  <insert id ="create" parameterType="dev.mvc.cafe.CafeVO"> <!--public int create(CafeCO cafeCO){ -->
+    INSERT INTO CAFE(CAFENO, NAME, NAMESUB, CNT, RDATE, SEQNO ,VISIBLE)
+    VALUES(CAFE_SEQ.nextval,#{name},#{namesub},0,sysdate,1,'Y')
+  </insert>
+  
+  
+  <select id="list_all" resultType="dev.mvc.cafe.CafeVO">
+      SELECT cafeno,name,namesub,cnt,rdate,seqno,visible
+      FROM cafe
+      ORDER BY name ASC, namesub ASC
+  </select>
+  
+  <select id="read" resultType="dev.mvc.cafe.CafeVO" parameterType="int">
+    SELECT cafeno, name, namesub, cnt, rdate, seqno, visible
+    FROM cafe
+    where cafeno=#{cafeno}
+  </select>
+  
+  <!-- 수정, return: 수정한 레코드 갯수, parameterType: 수정할 레코드 정보 -->
+  <update id="update" parameterType="dev.mvc.cafe.CafeVO">
+    UPDATE cafe
+    SET name=#{name}, namesub=#{namesub}, cnt=#{cnt}, rdate=sysdate, seqno=#{seqno}, visible=#{visible}
+    WHERE cafeno=#{cafeno}
+  </update>
+  
+  <delete id="delete" parameterType="Integer">
+    DELETE FROM cafe WHERE cafeno=#{cafeno}
+  </delete>
+     
+</mapper>

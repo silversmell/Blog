@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{layout}"> <!-- layout.html 상속-->
+<div layout:fragment="content">
+  <div class="title_line">카테고리 조회</div>
+
+  <div class="container mt-3">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">번호: <span th:text="${cafeVO.cafeno}"></span></li>
+      <li class="list-group-item">중분류: <span th:text="${cafeVO.name}"></span></li>
+      <li class="list-group-item">소분류: <span th:text="${cafeVO.namesub}"></span></li>
+      <li class="list-group-item">관련 자료수: <span th:text="${cafeVO.cnt}"></span></li>
+      <li class="list-group-item">등록일: <span th:text="${cafeVO.rdate}"></span></li>
+      <li class="list-group-item">출력 순서: <span th:text="${cafeVO.seqno}"></span></li>
+      <li class="list-group-item">출력 모드: <span th:text="${cafeVO.visible}"></span></li>
+    </ul>  
+  </div>
+
+  <div class="content_body_bottom">
+    <button type="button" onclick="location.href='/cafe/list_all'" class="btn btn-secondary btn-sm">목록</button>
+    <button type="button" th:attr="onclick=|location.href='/cafe/update/${cafeVO.cafeno}'|" class="btn btn-secondary btn-sm">수정</button>
+    <button type="button" th:attr="onclick=|location.href='/cafe/delete/${cafeVO.cafeno}'|" class="btn btn-secondary btn-sm">삭제</button>
+    <button type="button" onclick="location.href='/cafe/create'" class="btn btn-secondary btn-sm">등록</button>
+  </div>
+  
+</div>
+</html>
+
+
+
