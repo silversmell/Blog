@@ -46,6 +46,7 @@ public interface CafeDAOInter {
    */
   
   public int update_visible_y(int cafeno);
+    
   
   /**
    * 카테고리 비공개 설정
