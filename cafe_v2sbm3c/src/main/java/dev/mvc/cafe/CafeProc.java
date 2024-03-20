@@ -47,4 +47,28 @@ public class CafeProc implements CafeProcInter {
     return cnt;
   }
 
+@Override
+public int update_seqno_forward(int cafeno) {
+	int cnt = this.cafeDAO.update_seqno_forward(cafeno);
+	return cnt;
+}
+
+@Override
+public int update_seqno_backward(int cafeno) {
+	int cnt = this.cafeDAO.update_seqno_backward(cafeno);
+	return cnt;
+}
+
+@Override
+public int update_visible_y(int cafeno) {
+	int cnt = this.cafeDAO.update_visible_y(cafeno);
+	return cnt;
+}
+
+@Override
+public int update_visible_n(int cafeno) {
+	int cnt = this.cafeDAO.update_visible_n(cafeno);
+	return cnt;
+}
+
 }

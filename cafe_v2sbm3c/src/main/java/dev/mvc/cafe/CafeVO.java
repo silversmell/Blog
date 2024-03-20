@@ -21,7 +21,7 @@ public class CafeVO {
 
   /** 소분류명 */
   @NotEmpty(message="카페명은 필수 입력 항목입니다.")
-  @Size(min=2, max=10, message="카페명의 입력 글자 수는 최소 2자에서 10자 이어야합니다.")
+  @Size(min=1, max=20, message="카페명의 입력 글자 수는 최소 1자에서 20자(한글 10자) 이어야합니다.")
   private String namesub;
   
   /** 관련 자료수 */

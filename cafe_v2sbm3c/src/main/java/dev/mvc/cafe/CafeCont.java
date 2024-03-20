@@ -28,7 +28,7 @@ public class CafeCont {
 	}
 
 //  //폼 출력
-//  @GetMapping(value="/create") // http://localhost:9092/cafe/create
+//  @GetMapping(value="/create") // http://localhost:9092/cafe/list_all
 //  public String create(Model model,CafeVO cafeVO) { 
 //	  ArrayList<CafeVO> list = cafeProc.list_all();
 //	  model.addAttribute("list", list);
@@ -184,5 +184,51 @@ public class CafeCont {
 			return "/cafe/msg"; //
 		}
 	}
+	
+	@GetMapping(value="/update_seqno_forward/{cafeno}")
+	public String update_seqno_forward(Model model, @PathVariable("cafeno") Integer cafeno) {
+		this.cafeProc.update_seqno_forward(cafeno);
+		
+		ArrayList<CafeVO> list = this.cafeProc.list_all();
+		model.addAttribute("list", list);
+		
+		return "redirect:/cafe/list_all";
+		
+		
+	}
+	
+	@GetMapping(value="/update_seqno_backward/{cafeno}")
+	public String update_seqno_backward(Model model, @PathVariable("cafeno") Integer cafeno) {
+		this.cafeProc.update_seqno_forward(cafeno);
+		
+		ArrayList<CafeVO> list = this.cafeProc.list_all();
+		model.addAttribute("list", list);
+		
+		return "redirect:/cafe/list_all";
+		
+	}
+	
+	@GetMapping(value="/update_visible_y/{cafeno}")
+	public String update_visible_y(Model model, @PathVariable("cafeno") Integer cafeno) {
+		this.cafeProc.update_visible_y(cafeno);
+		
+		ArrayList<CafeVO> list = this.cafeProc.list_all();
+		model.addAttribute("list", list);
+		
+		return "redirect:/cafe/list_all";
+		
+	}
+	
+	@GetMapping(value="/update_visible_n/{cafeno}")
+	public String update_visible_n(Model model, @PathVariable("cafeno") Integer cafeno) {
+		this.cafeProc.update_visible_n(cafeno);
+		
+		ArrayList<CafeVO> list = this.cafeProc.list_all();
+		model.addAttribute("list", list);
+		
+		return "redirect:/cafe/list_all";
+		
+	}
+	
 
 }

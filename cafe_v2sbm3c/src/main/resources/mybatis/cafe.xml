@@ -9,12 +9,12 @@
   
   
   <select id="list_all" resultType="dev.mvc.cafe.CafeVO">
-      SELECT cafeno,name,namesub,cnt,rdate,seqno,visible
-      FROM cafe
-      ORDER BY name ASC, namesub ASC
+	SELECT cafeno, name, namesub, cnt, rdate, seqno, visible
+	FROM cafe
+	ORDER BY seqno ASC
   </select>
   
-  <select id="read" resultType="dev.mvc.cafe.CafeVO" parameterType="int">
+  <select id="read" resultType="dev.mvc.cafe.CafeVO" parameterType="Integer">
     SELECT cafeno, name, namesub, cnt, rdate, seqno, visible
     FROM cafe
     where cafeno=#{cafeno}
@@ -30,5 +30,32 @@
   <delete id="delete" parameterType="Integer">
     DELETE FROM cafe WHERE cafeno=#{cafeno}
   </delete>
+  
+   <!--  출력 순서 낮춤: seqno 1 -> 10 -->
+    <update id="update_seqno_backward" parameterType="Integer">
+		UPDATE cafe
+		SET seqno=seqno-1
+		WHERE cafeno=#{cafeno}
+  </update>
+  
+  <!--  출력 순서 높임: seqno 10 -> 1 -->
+    <update id="update_seqno_forward" parameterType="Integer">
+		UPDATE cafe
+		SET seqno=seqno+1
+		WHERE cafeno=#{cafeno}
+   </update>
+   
+    <!-- 카테고리 공개 설정 -->
+   <update id="update_visible_y" parameterType="Integer">
+   	  UPDATE cafe SET visible='Y' 
+   	  WHERE cafeno=#{cateno}
+   </update>
+   <!-- 카테고리 비공개 설정 -->
+     <update id="update_visible_n" parameterType="Integer">
+   	  UPDATE cafe SET visible='N' 
+   	  WHERE cafeno=#{cateno}
+   </update>
+  
+
      
 </mapper>
