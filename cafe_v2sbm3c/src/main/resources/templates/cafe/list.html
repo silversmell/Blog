@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{layout}"> <!-- layout.html 상속-->
+<div layout:fragment="content">
+ <div class="title_line">카테고리</div>
+    
+  <table class="table table-hover">
+    <colgroup>
+      <col style='width: 10%;'/>
+      <col style='width: 20%;'/>
+      <col style='width: 20%;'/>
+      <col style='width: 10%;'/>    
+      <col style='width: 20%;'/>
+      <col style='width: 20%;'/>
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="th_bs">순서</th>
+        <th class="th_bs">지역명</th>
+        <th class="th_bs">카페명</th>
+        <th class="th_bs">자료수</th>
+        <th class="th_bs">등록일</th>
+        <th class="th_bs">기타</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="cafeVO:${list}">
+        <td class="td_bs" th:text="${cafeVO.cafeno}"></td>
+        <td class="td_bs"><a th:href="@{|/cafe/read/${cafeVO.cafeno}|}" style="display: block;" th:text="${cafeVO.name}"></a></td>
+        <td class="td_bs"><a th:href="@{|/cafe/read/${cafeVO.cafeno}|}" style="display: block;" th:text="${cafeVO.namesub}"></a></td>
+        <td class="td_bs" th:text="${cafeVO.cnt}"></td>
+        <td class="td_bs" th:text="${cafeVO.rdate.substring(0, 10)}"></td>
+        <td class="td_bs">
+          <img src="/cafe/images/show.png" class="icon"> 
+          <img src="/cafe/images/decrease.png" class="icon">
+          <img src="/cafe/images/increase.png" class="icon">
+          <a th:href="@{|/cafe/update/${cafeVO.cafeno}|}"><img src="/cafe/images/update.png" class="icon"></a>
+          <a th:href="@{|/cafe/delete/${cafeVO.cafeno}|}"><img src="/cafe/images/delete.png" class="icon"></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </form>
+  
+</div>
+</html>
+
+
+
+
+
+

@@ -34,10 +34,10 @@ public class CafeCont {
 //	  model.addAttribute("list", list);
 //    return "/cafe/create";
 //  }
+	
 
 	@PostMapping(value = "/create") // 프론트단에서 해결하면 네트워크 트래픽이 많이 감소됨.(하지만 타임리프는 서버단 검증)
-	public String create(Model model, @Valid CafeVO cafeVO, BindingResult bindingResult) { // Valid 의 값을 BiningResult에
-																							// 저장
+	public String create(Model model, @Valid CafeVO cafeVO, BindingResult bindingResult) { // Valid 의 값을 BiningResult에 저장																							// 저장
 		ArrayList<CafeVO> list = this.cafeProc.list_all();
 		model.addAttribute("list", list);
 
@@ -59,12 +59,20 @@ public class CafeCont {
 
 	}
 
-	@GetMapping(value = "list_all")
+	@GetMapping(value = "/list_all") // http://localhost:9092/cafe/list_all
 	public String list_all(Model model, CafeVO cafeVO) {
 		ArrayList<CafeVO> list = this.cafeProc.list_all();
 		model.addAttribute("list", list);
 
 		return "/cafe/list_all";
+	}
+	
+	@GetMapping(value="/list")
+	public String list(Model model,CafeVO cafeVO) {
+		ArrayList<CafeVO> list = this.cafeProc.list_all();
+		model.addAttribute("list", list);
+		
+		return"/cafe/list";
 	}
 
 	@GetMapping(value = "/read/{cafeno}")
@@ -175,7 +183,6 @@ public class CafeCont {
 			model.addAttribute("code", "delete_fail");
 			return "/cafe/msg"; //
 		}
-
 	}
 
 }

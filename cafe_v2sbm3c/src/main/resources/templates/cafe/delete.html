@@ -5,13 +5,20 @@
   <div class='title_line'>
     카테고리 > 
     <span th:text="${cafeVO.name}" class="title_line_text"></span >
-    
     <span th:if="${cafeVO.namesub != '-'}" th:text="' > ' + ${cafeVO.namesub}" class="title_line_text"></span>
     
     삭제
   </div>
-  <div id='panel_delete' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 100%; text-align: center;'>
-
+   <aside class="aside_right">
+  <a th:href="@{|/cafe/update/${cafeVO.cafeno}|}">수정</a>
+  <span class="menu_divide">│</span>
+  <a href="/cafe/list_all">등록</a>
+  <span class="menu_divide">│</span>
+    <a href="javascript: location.reload();">새로 고침</a>
+  </aside>
+  
+   <div id='panel_delete' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 100%; text-align: center;'>
+   
     <form name="frm" th:object="${cafeVO}" method="post" action="/cafe/delete">
       <input type="hidden" name="cafeno" th:value="${cafeVO.cafeno}">
   
@@ -24,6 +31,7 @@
         <button type="submit" class="btn btn-secondary btn-sm">삭제</button>
         <button type="button" onclick="location.href='/cafe/list_all'" class="btn btn-secondary btn-sm">목록(취소)</button>
       </div>
+      
     </form>  
       <table class="table table-hover">
     <colgroup>
@@ -59,7 +67,6 @@
           <a th:href="@{|/cafe/delete/${cafeVO.cafeno}|}"><img src="/cafe/images/delete.png" class="icon"></a>
         </td>
       </tr>
-    </tbody>
   </table>
  
   </div>  
