@@ -56,8 +56,29 @@ public interface CafeDAOInter {
    */
   
   public int update_visible_n(int cafeno);
+  /**
+   * 중분류 가져오기
+   * select id="list_all_y"
+   * @return ArrayList<CafeVO>
+   */
+  public ArrayList<CafeVO> list_all_name_y();
   
-  
-  
+  /**
+   * 중분류를 이용해서 소분류
+   * select id="list_all_namesub_y"
+   * @return ArrayList<CafeVO>
+   */
+  public ArrayList<CafeVO>list_all_namesub_y(String name);
   
 }
+
+
+
+
+
+
+
+
+
+
+

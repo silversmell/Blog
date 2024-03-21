@@ -55,6 +55,24 @@
    	  UPDATE cafe SET visible='N' 
    	  WHERE cafeno=#{cateno}
    </update>
+   
+   <!-- 회원/비회원에게 공개할 중분류 목록 -->
+   <select id="list_all_name_y" resultType="dev.mvc.cafe.CafeVO">
+   	SELECT cafeno,name,seqno,visible
+	FROM cafe
+	WHERE name IN(
+  	SELECT DISTINCT name
+  	FROM cafe
+ 	 ) AND namesub='-' AND visible='Y'
+  	ORDER BY seqno ASC
+  	</select>
+  	
+  	<select id="list_all_namesub_y" resultType="dev.mvc.cafe.CafeVO" parameterType="String">
+  	SELECT cafeno, name, namesub,cnt,rdate,seqno,visible
+	FROM cafe
+	WHERE name=#{name} AND namesub!='-' AND visible='Y'
+	ORDER BY name ASC
+  	</select>
   
 
      

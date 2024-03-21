@@ -71,4 +71,40 @@ public int update_visible_n(int cafeno) {
 	return cnt;
 }
 
+@Override
+public ArrayList<CafeVO> list_all_name_y() {
+	ArrayList<CafeVO> list = this.cafeDAO.list_all_name_y();
+	return list;
+}
+
+@Override
+public ArrayList<CafeVO> list_all_namesub_y(String name) {
+	ArrayList<CafeVO> list = this.cafeDAO.list_all_namesub_y(name);
+	return list;
+}
+
+@Override
+public ArrayList<CafeVOMenu> menu() {
+	//중분류 목록 저장할 객체 선언
+	ArrayList<CafeVOMenu> menu = new ArrayList<CafeVOMenu>();
+	
+	//중분류 목록 로딩
+	ArrayList<CafeVO> list = this.cafeDAO.list_all_name_y();
+	
+	//중분류+소분류 집합
+	for(CafeVO cafeVO:list) {
+		CafeVOMenu cafeVOMenu = new CafeVOMenu(); //하나의 중분류 메뉴 그룹
+		cafeVOMenu.setName(cafeVO.getName()); //cafeVO에 있던 name을 CafeVOMenu에 name 세팅
+		
+		//중분류를 이용하여 소분류를 가져옴.
+		ArrayList<CafeVO> list_namesub = this.cafeDAO.list_all_namesub_y(cafeVOMenu.getName());
+		cafeVOMenu.setList_namesub(list_namesub);
+		
+		if(list_namesub.size()>0) {
+			menu.add(cafeVOMenu);
+		}
+	}
+	
+	return menu;
+}
 }

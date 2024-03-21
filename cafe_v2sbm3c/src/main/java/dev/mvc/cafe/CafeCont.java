@@ -37,7 +37,10 @@ public class CafeCont {
 	
 
 	@PostMapping(value = "/create") // 프론트단에서 해결하면 네트워크 트래픽이 많이 감소됨.(하지만 타임리프는 서버단 검증)
-	public String create(Model model, @Valid CafeVO cafeVO, BindingResult bindingResult) { // Valid 의 값을 BiningResult에 저장																							// 저장
+	public String create(Model model, @Valid CafeVO cafeVO, BindingResult bindingResult) { // Valid 의 값을 BiningResult에 저장	
+	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
+	   model.addAttribute("menu",menu);
+		   
 		ArrayList<CafeVO> list = this.cafeProc.list_all();
 		model.addAttribute("list", list);
 
@@ -61,6 +64,9 @@ public class CafeCont {
 
 	@GetMapping(value = "/list_all") // http://localhost:9092/cafe/list_all
 	public String list_all(Model model, CafeVO cafeVO) {
+	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
+	   model.addAttribute("menu",menu);
+	   
 		ArrayList<CafeVO> list = this.cafeProc.list_all();
 		model.addAttribute("list", list);
 
@@ -69,6 +75,8 @@ public class CafeCont {
 	
 	@GetMapping(value="/list")
 	public String list(Model model,CafeVO cafeVO) {
+	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
+	   model.addAttribute("menu",menu);
 		ArrayList<CafeVO> list = this.cafeProc.list_all();
 		model.addAttribute("list", list);
 		
@@ -77,6 +85,10 @@ public class CafeCont {
 
 	@GetMapping(value = "/read/{cafeno}")
 	public String read(Model model, @PathVariable("cafeno") Integer cafeno) {
+		
+	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
+	   model.addAttribute("menu",menu);
+	   
 		CafeVO cafeVO = this.cafeProc.read(cafeno);
 		model.addAttribute("cafeVO", cafeVO);
 		
@@ -95,6 +107,10 @@ public class CafeCont {
 	 */
 	@GetMapping(value = "/update/{cafeno}")
 	public String update(Model model, @PathVariable("cafeno") Integer cafeno) {
+		
+	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
+	   model.addAttribute("menu",menu);
+	   
 		ArrayList<CafeVO> list = this.cafeProc.list_all();
 		model.addAttribute("list", list);
 
@@ -115,6 +131,8 @@ public class CafeCont {
 	 */
 	@PostMapping(value = "/update") // http://localhost:9091/cafe/update
 	public String update(Model model, @Valid CafeVO cafeVO, BindingResult bindingResult) {
+	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
+	   model.addAttribute("menu",menu);
 
 		ArrayList<CafeVO> list = this.cafeProc.list_all();
 		model.addAttribute("list", list);
@@ -144,6 +162,9 @@ public class CafeCont {
 	 */
 	@GetMapping(value = "/delete/{cafeno}")
 	public String delete(Model model, @PathVariable("cafeno") Integer cafeno) {
+		
+	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
+	   model.addAttribute("menu",menu);
 
 		ArrayList<CafeVO> list = this.cafeProc.list_all();
 		model.addAttribute("list", list);
@@ -165,6 +186,10 @@ public class CafeCont {
 	 */
 	@PostMapping(value = "/delete")
 	public String delete_process(Model model, Integer cafeno) {
+		
+	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
+	   model.addAttribute("menu",menu);
+	   
 		CafeVO cafeVO = this.cafeProc.read(cafeno); // 삭제 정보 출력용 객체
 
 		ArrayList<CafeVO> list = this.cafeProc.list_all();
@@ -187,6 +212,10 @@ public class CafeCont {
 	
 	@GetMapping(value="/update_seqno_forward/{cafeno}")
 	public String update_seqno_forward(Model model, @PathVariable("cafeno") Integer cafeno) {
+		
+	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
+	   model.addAttribute("menu",menu);
+	   
 		this.cafeProc.update_seqno_forward(cafeno);
 		
 		ArrayList<CafeVO> list = this.cafeProc.list_all();
@@ -199,6 +228,10 @@ public class CafeCont {
 	
 	@GetMapping(value="/update_seqno_backward/{cafeno}")
 	public String update_seqno_backward(Model model, @PathVariable("cafeno") Integer cafeno) {
+		
+	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
+	   model.addAttribute("menu",menu);
+	   
 		this.cafeProc.update_seqno_forward(cafeno);
 		
 		ArrayList<CafeVO> list = this.cafeProc.list_all();
@@ -210,6 +243,10 @@ public class CafeCont {
 	
 	@GetMapping(value="/update_visible_y/{cafeno}")
 	public String update_visible_y(Model model, @PathVariable("cafeno") Integer cafeno) {
+		
+	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
+	   model.addAttribute("menu",menu);
+	   
 		this.cafeProc.update_visible_y(cafeno);
 		
 		ArrayList<CafeVO> list = this.cafeProc.list_all();
@@ -221,6 +258,10 @@ public class CafeCont {
 	
 	@GetMapping(value="/update_visible_n/{cafeno}")
 	public String update_visible_n(Model model, @PathVariable("cafeno") Integer cafeno) {
+		
+	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
+	   model.addAttribute("menu",menu);
+	   
 		this.cafeProc.update_visible_n(cafeno);
 		
 		ArrayList<CafeVO> list = this.cafeProc.list_all();
