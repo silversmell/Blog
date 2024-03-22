@@ -1,6 +1,33 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}"> <!-- layout.html 상속 -->
-  <div layout:fragment="content" style="width: 80%; margin: 50px auto; text-align: center;">
-    <img src="/images/main.jpg" style="width: 90%;"> <!-- /static/images/main.jpg -->
+
+
+<style>
+  /* 수정된 스타일 */
+  .content {
+    display: flex; /* Flexbox를 사용하여 수평 정렬합니다 */
+    justify-content: center; /* 가운데 정렬합니다 */
+    width: 100%;
+    margin: 50px auto;
+    text-align: center;
+    flex-wrap: wrap; /* 요소들이 넘치면 다음 줄로 넘어갈 수 있도록 합니다 */
+  }
+
+  .aa {
+    width: 33.33%;
+    margin: 5px;
+    text-align: center;
+    display: flex;
+  }
+
+  .aa img {
+    width: 100%; /* 이미지가 부모 요소인 .aa에 꽉 차도록 설정합니다 */
+  }
+</style>
+
+  <div layout:fragment="content" style=" width: 90%; margin: 50px auto; display: flex; justify-content: center;   "> 
+    <div class="aa" ><img src="/images/main.jpg" style="width:90%;" ></div> 
+    <div class="aa"><img src="/images/cafe2.jpg" style="width:90%;"></div>
+    <div class="aa"><img src="/images/cafe3.jpg" style="width:90%;"></div>
   </div>
 </html>

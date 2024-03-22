@@ -5,17 +5,19 @@
   <div class='title_line'>
     카테고리 > 
     <span th:text="${cafeVO.name}" class="title_line_text"></span >
+    
     <span th:if="${cafeVO.namesub != '-'}" th:text="' > ' + ${cafeVO.namesub}" class="title_line_text"></span>
     
     삭제
   </div>
    <aside class="aside_right">
-  <a th:href="@{|/cafe/update/${cafeVO.cafeno}|}">수정</a>
-  <span class="menu_divide">│</span>
-  <a href="/cafe/list_all">등록</a>
-  <span class="menu_divide">│</span>
+  	 <a th:href="@{|/cafe/update/${cafeVO.cafeno}|}">수정</a>
+  	 <span class="menu_divide">│</span>
+  	 <a href="/cafe/list_all">등록</a>
+     <span class="menu_divide">│</span>
     <a href="javascript: location.reload();">새로 고침</a>
   </aside>
+  <div class="menu_line"></div>
   
    <div id='panel_delete' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 100%; text-align: center;'>
    

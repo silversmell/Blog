@@ -104,7 +104,6 @@ public ArrayList<CafeVOMenu> menu() {
 			menu.add(cafeVOMenu);
 		}
 	}
-	
 	return menu;
 }
 }
