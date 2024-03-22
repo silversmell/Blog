@@ -70,7 +70,7 @@ public class CafeCont {
 		ArrayList<CafeVO> list = this.cafeProc.list_all();
 		model.addAttribute("list", list);
 
-		return "/cafe/list_all";
+		return "/cafe/list_all_vertical";
 	}
 	
 	@GetMapping(value="/list")

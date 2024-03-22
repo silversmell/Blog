@@ -37,7 +37,7 @@ public class CafeVO {
   @NotNull(message="출력 순서는 필수 입력 항목입니다.")
   @Min(value = 1)
   @Max(value = 1000000)
-  private Integer seqno=1;
+  private Integer seqno;
 
   /** 출력 모드 */
   @NotEmpty(message="출력 모드는 필수 입력 항목입니다.")
