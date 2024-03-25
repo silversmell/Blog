@@ -131,6 +131,7 @@ public class CafeCont {
 	 */
 	@PostMapping(value = "/update") // http://localhost:9091/cafe/update
 	public String update(Model model, @Valid CafeVO cafeVO, BindingResult bindingResult) {
+		
 	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
 	   model.addAttribute("menu",menu);
 

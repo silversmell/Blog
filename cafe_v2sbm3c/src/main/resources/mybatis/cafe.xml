@@ -11,7 +11,7 @@
   <select id="list_all" resultType="dev.mvc.cafe.CafeVO">
 	SELECT cafeno, name, namesub, cnt, rdate, seqno, visible
 	FROM cafe
-	ORDER BY seqno ASC
+	ORDER BY name ASC, seqno ASC
   </select>
   
   <select id="read" resultType="dev.mvc.cafe.CafeVO" parameterType="Integer">
