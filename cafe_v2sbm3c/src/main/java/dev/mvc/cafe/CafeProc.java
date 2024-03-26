@@ -106,4 +106,10 @@ public ArrayList<CafeVOMenu> menu() {
 	}
 	return menu;
 }
+
+@Override
+public ArrayList<CafeVO> list_search(String word) {
+	ArrayList<CafeVO> list = this.cafeDAO.list_search(word);
+	return list;
+}
 }

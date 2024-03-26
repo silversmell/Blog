@@ -73,6 +73,15 @@
 	WHERE name=#{name} AND namesub!='-' AND visible='Y'
 	ORDER BY name ASC
   	</select>
+  	
+  	<select id="list_search" resultType="dev.mvc.cafe.CafeVO" parameterType="String">
+  	SELECT cafeno, name, namesub, cnt, rdate, seqno, visible
+	FROM cafe
+	<if test="word!=null and word!=''">
+	WHERE UPPER(name) LIKE '%' || UPPER(#{word}) || '%' OR UPPER(namesub) LIKE '%' || UPPER(#{word}) || '%'  
+	</if>
+	ORDER BY name ASC, seqno ASC
+  	</select>
   
 
      

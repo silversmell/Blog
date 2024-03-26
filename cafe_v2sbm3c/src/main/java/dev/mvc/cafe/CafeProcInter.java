@@ -54,5 +54,13 @@ public interface CafeProcInter {
    */
   public ArrayList<CafeVOMenu> menu();
   
+  /**
+   * 관리자용 검색 목록
+   * select id="list_search" resultType="dev.mvc.cate.CateVO" parameterType="String"
+   * @param map
+   * @return 조회한 레코드 목록
+   */
+  public ArrayList<CafeVO> list_search(String word);  
+  
 
 }

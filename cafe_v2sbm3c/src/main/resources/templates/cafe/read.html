@@ -5,9 +5,9 @@
 
     <div class="title_line">카테고리 조회</div>
   <aside class="aside_right">
-  <a href="/cate/list_all">목록</a>
+  <a th:href="@{|/cafe/list_search/word=${word}|}">목록</a>
   <span class="menu_divide">│</span>
-  <a th:href="@{|/cafe/update/${cafeVO.cafeno}|}">수정</a>
+  <a th:href="@{|/cafe/update/${cafeVO.cafeno}/${word}|}">수정</a>
   <span class="menu_divide">│</span>
   <a th:href="@{|/cafe/delete/${cafeVO.cafeno}|}">삭제</a>
   <span class="menu_divide">│</span>
@@ -29,12 +29,6 @@
     </ul>  
   </div>
 
-  <div class="content_body_bottom">
-    <button type="button" onclick="location.href='/cafe/list_all'" class="btn btn-secondary btn-sm">목록</button>
-    <button type="button" th:attr="onclick=|location.href='/cafe/update/${cafeVO.cafeno}'|" class="btn btn-secondary btn-sm">수정</button>
-    <button type="button" th:attr="onclick=|location.href='/cafe/delete/${cafeVO.cafeno}'|" class="btn btn-secondary btn-sm">삭제</button>
-    <button type="button" onclick="location.href='/cafe/create'" class="btn btn-secondary btn-sm">등록</button>
-  </div>
    
      <!-- /cafe/list_all_component.html 파일의 list_all_fragment import -->
   <div th:replace="~{/cafe/list_all_component::list_all_fragment}"></div>

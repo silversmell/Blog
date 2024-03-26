@@ -25,24 +25,24 @@
     <tbody>
       <tr th:each="cafeVO:${list}">
         <td class="td_bs" th:text="${cafeVO.cafeno}"></td>
-        <td class="td_bs"><a th:href="@{|/cafe/read/${cafeVO.cafeno}|}" style="display: block;" th:text="${cafeVO.name}"></a></td>
-        <td class="td_bs"><a th:href="@{|/cafe/read/${cafeVO.cafeno}|}" style="display: block;" th:text="${cafeVO.namesub}"></a></td>
+        <td class="td_bs"><a th:href="@{|/cafe/read/${cafeVO.cafeno}/{word}|}" style="display: block;" th:text="${cafeVO.name}"></a></td>
+        <td class="td_bs"><a th:href="@{|/cafe/read/${cafeVO.cafeno}/{word}|}" style="display: block;" th:text="${cafeVO.namesub}"></a></td>
         <td class="td_bs" th:text="${cafeVO.cnt}"></td>
         <td class="td_bs" th:text="${cafeVO.rdate.substring(0, 10)}"></td>
         <td class="td_bs" th:text="${cafeVO.seqno}"></td>
         <td class="td_bs">
         
        <span th:if="${cafeVO.visible == 'Y'}">
-          <a th:href="@{|/cafe/update_visible_n/${cafeVO.cafeno}|}"><img src="/cafe/images/show.png" class="icon" title="출력"></a>
+          <a th:href="@{|/cafe/update_visible_n/${cafeVO.cafeno}/${word}|}"><img src="/cafe/images/show.png" class="icon" title="출력"></a>
         </span>
         <span th:unless="${cafeVO.visible == 'Y'}">
-       	 	<a th:href="@{|/cafe/update_visible_y/${cafeVO.cafeno}|}"><img src="/cafe/images/hide.png" class="icon" title="숨김"></a>
+       	 	<a th:href="@{|/cafe/update_visible_y/${cafeVO.cafeno}/${word}|}"><img src="/cafe/images/hide.png" class="icon" title="숨김"></a>
         </span>
           <a th:href="@{|/cafe/update_visible_n/${cafeVO.cafeno}|}">
-          <a th:href="@{|/cafe/update_seqno_forward/${cafeVO.cafeno}|}"><img src="/cafe/images/increase.png" class="icon"></a>
-          <a th:href="@{|/cafe/update_seqno_backward/${cafeVO.cafeno}|}"><img src="/cafe/images/decrease.png" class="icon"></a>
-          <a th:href="@{|/cafe/update/${cafeVO.cafeno}|}"><img src="/cafe/images/update.png" class="icon"></a>
-          <a th:href="@{|/cafe/delete/${cafeVO.cafeno}|}"><img src="/cafe/images/delete.png" class="icon"></a>
+          <a th:href="@{|/cafe/update_seqno_forward/${cafeVO.cafeno}/${word}|}"><img src="/cafe/images/increase.png" class="icon"></a>
+          <a th:href="@{|/cafe/update_seqno_backward/${cafeVO.cafeno}/${word}|}"><img src="/cafe/images/decrease.png" class="icon"></a>
+          <a th:href="@{|/cafe/update/${cafeVO.cafeno}/${word}|}"><img src="/cafe/images/update.png" class="icon"></a>
+          <a th:href="@{|/cafe/delete/${cafeVO.cafeno}/${word}|}"><img src="/cafe/images/delete.png" class="icon"></a>
         </td>
       </tr>
     </tbody>

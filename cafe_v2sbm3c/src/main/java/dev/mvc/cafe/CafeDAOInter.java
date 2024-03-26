@@ -70,6 +70,14 @@ public interface CafeDAOInter {
    */
   public ArrayList<CafeVO>list_all_namesub_y(String name);
   
+  /**
+   * 관리자용 검색 목록
+   * select id="list_search" resultType="dev.mvc.cate.CateVO" parameterType="String"
+   * @param map
+   * @return 조회한 레코드 목록
+   */
+  public ArrayList<CafeVO> list_search(String word);    
+  
 }
 
 
