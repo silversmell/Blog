@@ -25,8 +25,8 @@
     <tbody>
       <tr th:each="cafeVO:${list}">
         <td class="td_bs" th:text="${cafeVO.cafeno}"></td>
-        <td class="td_bs"><a th:href="@{|/cafe/read/${cafeVO.cafeno}/{word}|}" style="display: block;" th:text="${cafeVO.name}"></a></td>
-        <td class="td_bs"><a th:href="@{|/cafe/read/${cafeVO.cafeno}/{word}|}" style="display: block;" th:text="${cafeVO.namesub}"></a></td>
+        <td class="td_bs"><a th:href="@{|/cafe/read/${cafeVO.cafeno}/${word}|}" style="display: block;" th:text="${cafeVO.name}"></a></td>
+        <td class="td_bs"><a th:href="@{|/cafe/read/${cafeVO.cafeno}/${word}|}" style="display: block;" th:text="${cafeVO.namesub}"></a></td>
         <td class="td_bs" th:text="${cafeVO.cnt}"></td>
         <td class="td_bs" th:text="${cafeVO.rdate.substring(0, 10)}"></td>
         <td class="td_bs" th:text="${cafeVO.seqno}"></td>

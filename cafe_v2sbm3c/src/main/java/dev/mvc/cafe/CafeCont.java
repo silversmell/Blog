@@ -63,16 +63,16 @@ public class CafeCont {
 
 	}
 
-	@GetMapping(value = "/list_all") // http://localhost:9092/cafe/list_search
-	public String list_all(Model model, CafeVO cafeVO) {
-	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
-	   model.addAttribute("menu",menu);
-	   
-		ArrayList<CafeVO> list = this.cafeProc.list_all();
-		model.addAttribute("list", list);
-
-		return "/cafe/list_search";
-	}
+//	@GetMapping(value = "/list_all") // http://localhost:9092/cafe/list_search
+//	public String list_all(Model model, CafeVO cafeVO) {
+//	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
+//	   model.addAttribute("menu",menu);
+//	   
+//		ArrayList<CafeVO> list = this.cafeProc.list_all();
+//		model.addAttribute("list", list);
+//
+//		return "/cafe/list_search";
+//	}
 	
 	@GetMapping(value="/list")
 	public String list(Model model,CafeVO cafeVO) {
@@ -85,7 +85,7 @@ public class CafeCont {
 	}
 
 	@GetMapping(value = "/read/{cafeno}/{word}")
-	public String read(Model model, @PathVariable("cafeno") Integer cafeno,@PathVariable("word") String word) {
+	public String read(Model model, @PathVariable("cafeno") Integer cafeno, @PathVariable("word") String word) {
 		
 	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
 	   model.addAttribute("menu",menu);
@@ -109,7 +109,8 @@ public class CafeCont {
 	 * @return
 	 */
 	@GetMapping(value = "/update/{cafeno}/{word}")
-	public String update(Model model, @PathVariable("cafeno") Integer cafeno, @PathVariable("word") String word) {
+	public String update(Model model, @PathVariable("cafeno") Integer cafeno,
+			                                          @PathVariable("word") String word) {
 		
 	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
 	   model.addAttribute("menu",menu);
@@ -117,10 +118,11 @@ public class CafeCont {
 		CafeVO cafeVO = this.cafeProc.read(cafeno);
 		model.addAttribute("cafeVO", cafeVO);
 		
-		model.addAttribute("word",word);
-	   
 		ArrayList<CafeVO> list = this.cafeProc.list_search(word);
 		model.addAttribute("list", list);
+		
+		model.addAttribute("word",word);
+	  
 
 		return "/cafe/update"; //
 
