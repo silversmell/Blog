@@ -3,13 +3,16 @@
 <html layout:decorate="~{layout}"> <!-- layout.html 상속-->
 <div layout:fragment="content">
 
-    <div class="title_line">카테고리 조회</div>
+    <div class="title_line">카테고리 >
+     <span th:text="${cafeVO.name}" class="title_line_text"></span >
+    <span th:if="${cafeVO.namesub != '-'}" th:text="' > ' + ${cafeVO.namesub}" class="title_line_text"></span>
+     조회</div>
   <aside class="aside_right">
-  <a th:href="@{|/cafe/list_search/word=${word}|}">목록</a>
+  <a th:href="@{|/cafe/list_search?word=${word}|}">목록</a>
   <span class="menu_divide">│</span>
-  <a th:href="@{|/cafe/update/${cafeVO.cafeno}/${word}|}">수정</a>
+  <a th:href="@{|/cafe/update/${cafeVO.cafeno}?word=${word}|}">수정</a>
   <span class="menu_divide">│</span>
-  <a th:href="@{|/cafe/delete/${cafeVO.cafeno}|}">삭제</a>
+  <a th:href="@{|/cafe/delete/${cafeVO.cafeno}?word=${word}|}">삭제</a>
   <span class="menu_divide">│</span>
   <a href="/cafe/list_all">등록</a>
   <span class="menu_divide">│</span>
@@ -17,7 +20,7 @@
   </aside>
   <div class="menu_line"></div>
   
-  <div class="container mt-3">
+  <div class="container mt-3" style="width: 50%; margin: 5px auto;">
     <ul class="list-group list-group-flush">
       <li class="list-group-item">번호: <span th:text="${cafeVO.cafeno}"></span></li>
       <li class="list-group-item">지역명: <span th:text="${cafeVO.name}"></span></li>
