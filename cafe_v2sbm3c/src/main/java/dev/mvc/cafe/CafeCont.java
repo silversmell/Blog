@@ -1,6 +1,7 @@
 package dev.mvc.cafe;
 
 import java.net.URLEncoder;
+import java.nio.channels.IllegalBlockingModeException;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -141,7 +142,7 @@ public class CafeCont {
 	 * @return
 	 */
 	@PostMapping(value = "/update") // http://localhost:9091/cafe/update
-	public String update(Model model, @Valid CafeVO cafeVO, BindingResult bindingResult,String word) {
+	public String update(Model model, @Valid CafeVO cafeVO, BindingResult bindingResult, @RequestParam(name="word", defaultValue = "") String word) {
 		
 		model.addAttribute("word", word);
 
@@ -214,6 +215,7 @@ public class CafeCont {
 													@PathVariable("cafeno") Integer cafeno,
 													@RequestParam(name="word",defaultValue="") String word) {
 		
+		
 		this.cafeProc.update_seqno_forward(cafeno);
 		
 		return "redirect:/cafe/list_search?word=" + Tool.encode(word);
@@ -248,7 +250,6 @@ public class CafeCont {
 											@PathVariable("cafeno") Integer cafeno,
 											@RequestParam(name="word",defaultValue="") String word) {
 		
-	   
 		this.cafeProc.update_visible_n(cafeno);
 		
 		return "redirect:/cafe/list_search?word=" + Tool.encode(word);
@@ -256,8 +257,9 @@ public class CafeCont {
 	}
 	
 	@GetMapping(value="/list_search")
-	public String list_search(Model model, CafeVO cafeVO,String word) {
+	public String list_search(Model model, CafeVO cafeVO,@RequestParam(name="word",defaultValue="") String word) {
 		
+		Tool.checkNull(word);
 		System.out.println("--> word" + word);
 		
 		ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
