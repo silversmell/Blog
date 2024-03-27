@@ -14,7 +14,7 @@
   <span class="menu_divide">│</span>
   <a th:href="@{|/cafe/delete/${cafeVO.cafeno}?word=${word}|}">삭제</a>
   <span class="menu_divide">│</span>
-  <a href="/cafe/list_all">등록</a>
+  <a th:href="@{|/cafe/list_search?word=${word}|}">등록</a>
   <span class="menu_divide">│</span>
     <a href="javascript: location.reload();">새로 고침</a>
   </aside>

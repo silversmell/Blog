@@ -45,10 +45,11 @@ public class CafeCont {
 	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
 	   model.addAttribute("menu",menu);
 		   
-		ArrayList<CafeVO> list = this.cafeProc.list_search(word);
-		model.addAttribute("list", list);
 
 		if (bindingResult.hasErrors()) {
+			ArrayList<CafeVO> list = this.cafeProc.list_search(word);
+			model.addAttribute("list", list);
+			
 			return "/cafe/list_search";
 		}
 
@@ -122,12 +123,10 @@ public class CafeCont {
 		CafeVO cafeVO = this.cafeProc.read(cafeno);
 		model.addAttribute("cafeVO", cafeVO);
 		
-		
 		ArrayList<CafeVO> list = this.cafeProc.list_search(word);
 		model.addAttribute("list", list);
 		
 		model.addAttribute("word",word);
-	
 	  
 		return "/cafe/update"; //
 
@@ -144,9 +143,14 @@ public class CafeCont {
 	@PostMapping(value = "/update") // http://localhost:9091/cafe/update
 	public String update(Model model, @Valid CafeVO cafeVO, BindingResult bindingResult, @RequestParam(name="word", defaultValue = "") String word) {
 		
+	   ArrayList<CafeVOMenu> menu = this.cafeProc.menu();
+	   model.addAttribute("menu",menu);
+	   
 		model.addAttribute("word", word);
 
 		if (bindingResult.hasErrors()) {
+			ArrayList<CafeVO> list = this.cafeProc.list_search(word);
+			model.addAttribute("list", list);
 			return "/cafe/update"; // /templates/cafe/update.html
 		}
 		int cnt = this.cafeProc.update(cafeVO);
@@ -258,6 +262,7 @@ public class CafeCont {
 	
 	@GetMapping(value="/list_search")
 	public String list_search(Model model, CafeVO cafeVO,@RequestParam(name="word",defaultValue="") String word) {
+		
 		
 		Tool.checkNull(word);
 		System.out.println("--> word" + word);
