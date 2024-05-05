@@ -1,0 +1,2 @@
+Manifest-Version: 1.0
+Main-Class: dev.mvc.cafe_v2sbm3c.CafeV1sbm3cApplication 

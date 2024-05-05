@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{layout}"> <!-- layout.html 상속-->
+<div layout:fragment="content">
+ <div class="title_line">
+ 카테고리 검색
+ <span th:if="${word!=null and word!=''}" th:text="|${word} ${count} 건|">
+ </div>
+ 
+  <aside class="aside_right">
+  
+  	 <a th:href="@{|/cafe/delete_whole|}">전체삭제</a>
+  	 
+  	 <span class="menu_divide">│</span>
+    <a href="javascript: location.reload();">새로 고침</a>
+  </aside>
+  
+
+  <div th:replace="~{cafe/list_search_component::list_search_fragment}"></div>
+  <div class="menu_line"></div>
+  
+<div style="width: 100%; margin: 0px auto;">
+	  <form name="frm" th:object="${cafeVO}" method="post" action="/cafe/create">
+	  <input type="hidden" name="word" th:value="${word}">
+	  <input type="hidden" name="now_page" th:value="${now_page}">
+	  
+	    <div style="margin-left: 1%; margin-right: 5px; width: 29%; float: left;">
+	      <input type="text" name="name" value="" autofocus="autofocus"
+	             class="form-control fom-control-sm" style="width: 100%;" th:field="*{name}" placeholder="지역명 입력하세요.">
+	      <div th:if="${#fields.hasErrors('name')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+	        <div th:each="err : ${#lists.sort(#fields.errors('name'))}" th:text="${err}"></div>
+	      </div>  
+	    </div>
+	    <div style="margin-right: 5px; width: 29%; float: left;">
+	      <input type="text" name="namesub" value="" 
+	             class="form-control fom-control-sm" style="width: 100%;" th:field="*{namesub}" placeholder="카페명 입력하세요. '-' 중분류 입력">
+	      <div th:if="${#fields.hasErrors('namesub')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+	        <div th:each="err : ${#lists.sort(#fields.errors('namesub'))}" th:text="${err}"></div>
+	      </div>             
+	    </div>
+	        <div style="margin-right: 5px; width: 24%; float: left;">
+	      <input type="text" name="seqno" value="" 
+	             class="form-control fom-control-sm" style="width: 100%;" th:field="*{seqno}" placeholder="출력순서를 입력하세요.">
+	      <div th:if="${#fields.hasErrors('seqno')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+	        <div th:each="err : ${#lists.sort(#fields.errors('seqno'))}" th:text="${err}"></div>
+	      </div>             
+	    </div>
+	    <div style="margin-top: 5px; width: 14%; float: left;">
+	      <button type="submit" style="border:none; margin-right:3px"><img  src="/cafe/images/CHECK.png" style="width:28px;"></button>
+	      <button type="button" onclick="location.href='/cafe/list_search'" style="border:none; background-color: white"><img  src="/cafe/images/CANCEL.png" style="width: 28px;"></button>
+		</div>
+	</form>
+ </div>
+
+  <div th:replace="~{cafe/list_all_component::list_all_fragment}"></div>
+  
+</div>
+</html>
+
+
+
+
+
+

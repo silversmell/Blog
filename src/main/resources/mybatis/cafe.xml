@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.mvc.cafe.CafeDAOInter"> <!-- SB가 자동으로 구현하여 연동하는 interface -->
+  <insert id ="create" parameterType="dev.mvc.cafe.CafeVO"> <!--public int create(CafeCO cafeCO){ -->
+    INSERT INTO CAFE(CAFENO, NAME, NAMESUB, CNT, RDATE, SEQNO ,VISIBLE)
+    VALUES(CAFE_SEQ.nextval,#{name},#{namesub},0,sysdate,1,'Y')
+  </insert>
+  
+  
+  <select id="list_all" resultType="dev.mvc.cafe.CafeVO">
+	SELECT cafeno, name, namesub, cnt, rdate, seqno, visible
+	FROM cafe
+	ORDER BY seqno ASC
+  </select>
+  
+  <select id="read" resultType="dev.mvc.cafe.CafeVO" parameterType="Integer">
+    SELECT cafeno, name, namesub, cnt, rdate, seqno, visible
+    FROM cafe
+    where cafeno=#{cafeno}
+  </select>
+  
+  <!-- 수정, return: 수정한 레코드 갯수, parameterType: 수정할 레코드 정보 -->
+  <update id="update" parameterType="dev.mvc.cafe.CafeVO">
+    UPDATE cafe
+    SET name=#{name}, namesub=#{namesub}, cnt=#{cnt}, rdate=sysdate, seqno=#{seqno}, visible=#{visible}
+    WHERE cafeno=#{cafeno}
+  </update>
+  
+  <delete id="delete" parameterType="Integer">
+    DELETE FROM cafe 
+    	<if test="cafeno!=0 and cafeno!=''">
+			WHERE cafeno=#{cafeno}
+			</if>
+  </delete>
+  
+   <!--  출력 순서 낮춤: seqno 1 -> 10 -->
+    <update id="update_seqno_backward" parameterType="Integer">
+		UPDATE cafe
+		SET seqno=seqno-1
+		WHERE cafeno=#{cafeno}
+  </update>
+  
+  <!--  출력 순서 높임: seqno 10 -> 1 -->
+    <update id="update_seqno_forward" parameterType="Integer">
+		UPDATE cafe
+		SET seqno=seqno+1
+		WHERE cafeno=#{cafeno}
+   </update>
+   
+    <!-- 카테고리 공개 설정 -->
+   <update id="update_visible_y" parameterType="Integer">
+   	  UPDATE cafe SET visible='Y' 
+   	  WHERE cafeno=#{cateno}
+   </update>
+   <!-- 카테고리 비공개 설정 -->
+     <update id="update_visible_n" parameterType="Integer">
+   	  UPDATE cafe SET visible='N' 
+   	  WHERE cafeno=#{cateno}
+   </update>
+   
+   <!-- 회원/비회원에게 공개할 중분류 목록 -->
+   <select id="list_all_name_y" resultType="dev.mvc.cafe.CafeVO">
+   	SELECT cafeno,name,seqno,visible
+	FROM cafe
+	WHERE name IN(
+  	SELECT DISTINCT name
+  	FROM cafe
+ 	 ) AND namesub='-' AND visible='Y'
+  	ORDER BY seqno ASC
+  	</select>
+  	
+  	<select id="list_all_namesub_y" resultType="dev.mvc.cafe.CafeVO" parameterType="String">
+  	SELECT cafeno, name, namesub,cnt,rdate,seqno,visible
+	FROM cafe
+	WHERE name=#{name} AND namesub!='-' AND visible='Y'
+	ORDER BY name ASC
+  	</select>
+  	
+  	<select id="list_search" resultType="dev.mvc.cafe.CafeVO" parameterType="String">
+  	SELECT cafeno, name, namesub, cnt, rdate, seqno, visible
+	FROM cafe
+	<if test="word!=null and word!=''">
+	WHERE UPPER(name) LIKE '%' || UPPER(#{word}) || '%' OR UPPER(namesub) LIKE '%' || UPPER(#{word}) || '%'  
+	</if>
+	ORDER BY name ASC, seqno ASC
+  	</select>
+  	
+  	<!--관리자용 검색 목록, Map은 VO class보다 적은 변수의 전달시 사용 -->
+  	<!-- SQL ->CateVO ->ArrayList<CateVO> return -->
+  	<select id="list_search_paging" resultType="dev.mvc.cafe.CafeVO" parameterType="Map">
+  	SELECT cafeno, name, namesub, cnt, rdate, seqno, visible, r
+  	FROM (
+  	SELECT cafeno, name, namesub, cnt, rdate, seqno, visible, rownum as r
+  	FROM (
+  	SELECT cafeno, name, namesub, cnt, rdate, seqno, visible
+  	FROM cafe
+  	<if test="word != null and word!=''">
+  	 WHERE UPPER(name) LIKE '%' || UPPER(#{word}) || '%' OR UPPER(namesub) LIKE '%' || UPPER(#{word}) || '%'
+  	</if>
+  	ORDER BY seqno ASC
+  	)
+  	)
+  	 WHERE r &gt; = #{start_num} AND r &lt; = #{end_num} <!-- WHERE r >= 1 AND r <= 3 -->
+  	</select>
+  	  <!-- 검색된 레코드 수 -->
+  <select id="list_search_count" resultType="int" parameterType="String">
+    SELECT COUNT(*) as cnt
+    FROM cafe
+    
+    <if test="word != null and word != ''">
+      WHERE UPPER(name) LIKE '%' || UPPER(#{word}) || '%' OR UPPER(namesub) LIKE '%' || UPPER(#{word}) || '%'  
+    </if>
+        
+    ORDER BY seqno ASC
+  </select>
+ 
+</mapper>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<div th:fragment="list_all_fragment"> <!-- <div th:replace=... -->
+
+  <table class="table table-hover">
+    <colgroup>
+      <col style='width: 10%;'/>
+      <col style='width: 20%;'/>
+      <col style='width: 20%;'/>
+      <col style='width: 10%;'/>    
+      <col style='width: 10%;'/>
+      <col style='width: 5%;'/>
+      <col style='width: 20%;'/>
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="th_bs">순서</th>
+        <th class="th_bs">지역명</th>
+        <th class="th_bs">카페명</th>
+        <th class="th_bs">자료수</th>
+        <th class="th_bs">등록일</th>
+        <th class="th_bs">순서</th>
+        <th class="th_bs">기타</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="cafeVO, status:${list}">
+        <td class="td_bs" th:text="${no-status.index}"></td>
+        <td class="td_bs"><a th:href="@{|/cafe/read/${cafeVO.cafeno}?word=${word}&now_page=${now_page}|}" style="display: block;" th:text="${cafeVO.name}"></a></td>
+        <td class="td_bs"><a th:href="@{|/cafe/read/${cafeVO.cafeno}?word=${word}&now_page=${now_page}|}" style="display: block;" th:text="${cafeVO.namesub}"></a></td>
+        <td class="td_bs" th:text="${cafeVO.cnt}"></td>
+        <td class="td_bs" th:text="${cafeVO.rdate.substring(0, 10)}"></td>
+        <td class="td_bs" th:text="${cafeVO.seqno}"></td>
+        <td class="td_bs">
+        
+       <span th:if="${cafeVO.visible == 'Y'}">
+          <a th:href="@{|/cafe/update_visible_n/${cafeVO.cafeno}?word=${word}&now_page=${now_page}|}"><img src="/cafe/images/show.png" style="width:22px;" class="icon" title="출력"></a>
+        </span>
+        <span th:unless="${cafeVO.visible == 'Y'}">
+       	 	<a th:href="@{|/cafe/update_visible_y/${cafeVO.cafeno}?word=${word}&now_page=${now_page}|}"><img src="/cafe/images/hide.png" style="width:22px;" class="icon" title="숨김"></a>
+        </span>
+          <a th:href="@{|/cafe/update_visible_n/${cafeVO.cafeno}|}">
+          <a th:href="@{|/cafe/update_seqno_forward/${cafeVO.cafeno}?word=${word}&now_page=${now_page}|}"><img src="/cafe/images/UPGRADE.png" style="width:22px;" class="icon"></a>
+          <a th:href="@{|/cafe/update_seqno_backward/${cafeVO.cafeno}?word=${word}&now_page=${now_page}|}"><img src="/cafe/images/DOWN.png" style="width:22px;" class="icon"></a>
+          <a th:href="@{|/cafe/update/${cafeVO.cafeno}?word=${word}&now_page=${now_page}&now_page=${now_page}|}"><img src="/cafe/images/CHANGE.png" style="width:22px;" class="icon"></a>
+          <a th:href="@{|/cafe/delete/${cafeVO.cafeno}?word=${word}&now_page=${now_page}&now_page=${now_page}|}"><img src="/cafe/images/CANCEL.png" style="width:22px;" class="icon"></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+   <!-- 페이지 버튼 목록 출력 시작 -->
+  <div class="Bottom_menu" th:utext="${paging}"></div>
+  <!-- 페이지 버튼 목록 출력 종료 --> 
+  
+</div>
+</html>
+
+
+
+
+
+

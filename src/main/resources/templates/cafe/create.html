@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{layout}"> <!-- layout.html 상속-->
+<div layout:fragment="content">
+  <div class="title_line">카테고리 등록</div>
+  <form name="frm" th:object="${cafeVO}" method="post" action="/cafe/create">
+    <div style="margin: 5px auto; width: 50%;">
+      <input type="text" name="name" value="" autofocus="autofocus"
+             class="form-control fom-control-sm" style="width: 100%;" th:field="*{name}" placeholder="지역명을 입력하세요.">
+      <div th:if="${#fields.hasErrors('name')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+        <div th:each="err : ${#lists.sort(#fields.errors('name'))}" th:text="${err}"></div>
+      </div>  
+    </div>
+    <div style="margin: 5px auto; width: 50%;">
+      <input type="text" name="namesub" value="" 
+             class="form-control fom-control-sm" style="width: 100%;" th:field="*{namesub}" placeholder="카페명을 입력하세요.">
+      <div th:if="${#fields.hasErrors('namesub')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+        <div th:each="err : ${#lists.sort(#fields.errors('namesub'))}" th:text="${err}"></div>
+      </div>             
+    </div>
+    
+        <div class="content_body_bottom">
+      <button type="submit" class="btn btn-secondary btn-sm">등록</button>
+</div>
+
+  <table class="table table-hover">
+    <colgroup>
+      <col style='width: 10%;'/>
+      <col style='width: 20%;'/>
+      <col style='width: 20%;'/>
+      <col style='width: 10%;'/>    
+      <col style='width: 20%;'/>
+      <col style='width: 20%;'/>
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="th_bs">순서</th>
+        <th class="th_bs">지역명	</th>
+        <th class="th_bs">카페명</th>
+        <th class="th_bs">자료수</th>
+        <th class="th_bs">등록일</th>
+        <th class="th_bs">기타</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="cafeVO:${list}">
+        <td class="td_bs" th:text="${cafeVO.cafeno}"></td>
+        <td class="td_bs"><a th:href="@{|./read/${cafeVO.cafeno}|}" style="display: block;" th:text="${cafeVO.name}"></a></td>
+        <td class="td_bs"><a th:href="@{|./read/${cafeVO.cafeno}|}" style="display: block;" th:text="${cafeVO.namesub}"></a></td>
+        <td class="td_bs" th:text="${cafeVO.cnt}"></td>
+        <td class="td_bs" th:text="${cafeVO.rdate.substring(0, 10)}"></td>
+        <td class="td_bs">
+          <img src="/cafe/images/show.png" class="icon"> <!-- /static/cafe/images/show.png -->
+          <img src="/cafe/images/decrease.png" class="icon">
+          <img src="/cafe/images/increase.png" class="icon">
+          <a th:href="@{|/cafe/update/${cafeVO.cafeno}|}"><img src="/cafe/images/update.png" class="icon"></a>
+          <a th:href="@{|/cafe/delete/${cafeVO.cafeno}|}"><img src="/cafe/images/delete.png" class="icon"></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>
+</html>
+
