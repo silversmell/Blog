@@ -9,8 +9,6 @@
   </div>
   
   <aside class="aside_right" th:if="${session.grade == 'admin'}">
-    <a href="./create?cafeno=${cafeno }">등록</a>
-    <span class='menu_divide' >│</span>
     <a th:href="@{|/contents/update_text?cafe_contentsno=${contentsVO.cafe_contentsno}&now_page=${now_page}&word=${word }|}">글 수정</a>
     <span class='menu_divide' >│</span>
     <a th:href="@{|./update_file?cafe_contentsno=${contentsVO.cafe_contentsno}&word=${word}&now_page=${now_page}|}">파일 수정</a>  
@@ -18,14 +16,14 @@
     <a th:href="@{|./delete?cafe_contentsno=${contentsVO.cafe_contentsno}&word=${word}&now_page=${now_page}&cafeno=${contentsVO.cafeno}|}">삭제</a>  
     <a href="javascript:location.reload();">새로고침</a>
     <span class='menu_divide' >│</span>    
-    <a th:href="@{|./list_by_cafeno?cafeno=${cafeVO.cafeno}&word=${word }&now_page=${now_page}|}">목록형</a>    
-    <span class='menu_divide' >│</span>
   </aside> 
 
   <aside class="aside_right" th:if="${session.grade != 'admin'}">
+        <a href="/chatting/chatList">채팅</a>
+    <span class='menu_divide' >│</span>
+        <a href="./create?cafeno=${cafeno }">등록</a>
+    <span class='menu_divide' >│</span>
      <a href="javascript:location.reload();">새로고침</a>
-    <span class='menu_divide' >│</span>    
-    <a th:href="@{|./list_by_cafeno?cafeno=${cafeVO.cafeno }&word=${word }&now_page=${now_page}|}">목록형</a>    
 
   </aside> 
  

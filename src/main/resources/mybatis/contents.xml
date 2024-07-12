@@ -167,6 +167,8 @@
     DELETE FROM contents
     WHERE cafe_mno=#{cafe_mno}
   </delete>
+  
+  
             
 </mapper> 
 

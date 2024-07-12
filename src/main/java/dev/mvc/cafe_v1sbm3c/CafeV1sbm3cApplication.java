@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"dev.mvc"}) // ★★★★★★ 패키지 주의 ★★★★★★ 
+@ComponentScan(basePackages = {"dev.mvc","dev.jpa"}) // ★★★★★★ 패키지 주의 ★★★★★★ 
 public class CafeV1sbm3cApplication {
 
     public static void main(String[] args) {
