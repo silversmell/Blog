@@ -17,12 +17,13 @@
 <script th:inline="javascript">
 
 				let socket = new WebSocket("ws://localhost:9092/ws/chat");
-        function enterRoom(socket){
+        function enterRoom(socket){ // 여기서 handler -> 
         	//console.log("${room.roomId}");
         	//console.log(${session.id});
             var enterMsg=
             {"type" : "ENTER",
             	"roomId":[[${room.roomId}]],
+            	"name":[[${room.name}]],
             	"sender":[[${session.id}]],
             	"message":"111"}; 
             socket.send(JSON.stringify(enterMsg));
@@ -34,6 +35,7 @@
         };
         socket.onclose=function(e){
             console.log('disconnet');
+             //setTimeout(connectWebSocket, 5000); // 5초 후 재연결 시도
         }
 
         socket.onerror = function (e){
@@ -57,8 +59,9 @@
             //let content=document.querySelector('.content').value;
             console.log(content);
              var talkMsg={"type" : "TALK",
-            										 "roomId":[[${room.roomId}]],
-            										 "sender":[[${session.id}]],
+                                 "roomId":[[${room.roomId}]],
+                                 "name":[[${room.name}]],
+                                 "sender":[[${session.id}]],
             										 "message":content};
            socket.send(JSON.stringify(talkMsg));
         }

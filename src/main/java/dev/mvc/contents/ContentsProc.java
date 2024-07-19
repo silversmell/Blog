@@ -67,34 +67,10 @@ public class ContentsProc implements ContentsProcInter {
 
   @Override
   public ArrayList<ContentsVO> list_by_cafeno_search_paging(HashMap<String, Object> map) {
-    /*
-     * 예) 페이지당 10개의 레코드 출력 1 page: WHERE r >= 1 AND r <= 10 2 page: WHERE r >= 11
-     * AND r <= 20 3 page: WHERE r >= 21 AND r <= 30
-     * 
-     * 페이지에서 출력할 시작 레코드 번호 계산 기준값, nowPage는 1부터 시작 1 페이지 시작 rownum: now_page = 1, (1
-     * - 1) * 10 --> 0 2 페이지 시작 rownum: now_page = 2, (2 - 1) * 10 --> 10 3 페이지 시작
-     * rownum: now_page = 3, (3 - 1) * 10 --> 20
-     */
+
     int begin_of_page = ((int)map.get("now_page") - 1) * Contents.RECORD_PER_PAGE;
-
-    // 시작 rownum 결정
-    // 1 페이지 = 0 + 1: 1
-    // 2 페이지 = 10 + 1: 11
-    // 3 페이지 = 20 + 1: 21
     int start_num = begin_of_page + 1;
-
-    // 종료 rownum
-    // 1 페이지 = 0 + 10: 10
-    // 2 페이지 = 10 + 10: 20
-    // 3 페이지 = 20 + 10: 30
     int end_num = begin_of_page + Contents.RECORD_PER_PAGE;
-    /*
-     * 1 페이지: WHERE r >= 1 AND r <= 10 2 페이지: WHERE r >= 11 AND r <= 20 3 페이지: WHERE
-     * r >= 21 AND r <= 30
-     */
-
-    // System.out.println("begin_of_page: " + begin_of_page);
-    // System.out.println("WHERE r >= "+start_num+" AND r <= " + end_num);
 
     map.put("start_num", start_num);
     map.put("end_num", end_num);
@@ -104,18 +80,6 @@ public class ContentsProc implements ContentsProcInter {
     return list;
   }
     
-  /**
-   * SPAN태그를 이용한 박스 모델의 지원, 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
-   * 18 19 20 [다음]
-   * 
-   * @param now_page        현재 페이지
-   * @param word            검색어
-   * @param list_file       목록 파일명
-   * @param search_count    검색 레코드수
-   * @param record_per_page 페이지당 레코드 수
-   * @param page_per_block  블럭당 페이지 수
-   * @return 페이징 생성 문자열
-   */
   @Override
   public String pagingBox(int cafeno, int now_page, String word, String list_file, int search_count, int record_per_page,
       int page_per_block) {

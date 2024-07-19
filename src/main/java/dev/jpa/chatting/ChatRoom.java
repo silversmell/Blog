@@ -31,7 +31,11 @@ public class ChatRoom {
 			chatMessage.setMessage(chatMessage.getSender() + "님이 입장했습니다.");
 		}
 		sessions.add(session);
-		sendMessage(chatMessage,chatService);
+		String message = "";
+		//message+="Name: " + chatMessage.getName();
+		message+="Sender: " + chatMessage.getSender();
+		message+=" Message: "+ chatMessage.getMessage();
+		sendMessage(message,chatService);
 	}
 	
     private <T> void sendMessage(T message, ChatService chatService) {

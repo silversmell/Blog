@@ -54,10 +54,6 @@ public class ChatService {
 	    }
 	  
 	   public ChatRoom findRoomById(String roomId) {
-//		   ArrayList<ChatRoom> list = this.chatProc.read_chat();
-//		   for(int i = 0;i<list.size();i++) {
-//			   chatRooms.put(list.get(i).getRoomId(),(ChatRoom)list.get(i));
-//		   }
 		   return chatRooms.get(roomId);
 	   }
 	   
