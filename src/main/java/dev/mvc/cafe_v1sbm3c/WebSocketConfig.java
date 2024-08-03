@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSocket
-public class WebSocketConfig implements WebSocketConfigurer {
+public class WebSocketConfig implements WebSocketConfigurer { //webSocektHandler를 특정 url 경로에 등록하고 설정을 관리, webSocketConfig는 WebSocketHandler를 스프링 컨테이너에 등록하고 관리
     private final WebSocketHandler webSocketHandler;
 
     @Override
